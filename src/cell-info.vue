@@ -1,23 +1,24 @@
 <template lang="jade">
 #cell-info(v-if="cell")
-	a(href='#' onclick='document.getElementById("cell-info").style.display="none";return false;' style='color:white') (close)
+	a(href='#' onclick='document.getElementById("cell-info").style.display="none";return false;' style='color:white') (закрыть)
 	p
-		a(href='#' id='map-info-on' onclick='document.getElementById("map-info-on").style.display="none";document.getElementById("map-info-off").style.display="";document.getElementById("map-info").style.display=""; return false;' style='color:white') Erklärung einblenden
-		a(href='#' id='map-info-off' onclick='document.getElementById("map-info-on").style.display="";document.getElementById("map-info-off").style.display="none";document.getElementById("map-info").style.display="none"; return false;' style='color:white; display:none;') Erklärung ausblenden
+		a(href='#' id='map-info-on' onclick='document.getElementById("map-info-on").style.display="none";document.getElementById("map-info-off").style.display="";document.getElementById("map-info").style.display=""; return false;' style='color:white') Показать пояснения
+		a(href='#' id='map-info-off' onclick='document.getElementById("map-info-on").style.display="";document.getElementById("map-info-off").style.display="none";document.getElementById("map-info").style.display="none"; return false;' style='color:white; display:none;') Скрыть пояснения
 	div(id='map-info' style='display:none')
-		p Die Kacheln werden aktuell nach dem Durchschnitt der PM10-Werte aller in der Zelle enthaltenen Sensoren eingefärbt. Siehe dazu die Skala unten links.
-		p Die Zahlen in der ersten Spalte entsprechen den Sensor-IDs. Die erste Zeile 'mean' enthält die jeweiligen Durchschnittswerte aller in der Zelle enthaltenen Sensoren.
-		p Bitte beachten: Wir zeigen auf der Karte die Werte der letzten 5 Minuten an. Die von den jeweiligen Landesbehörden veröffentlichen Werte werden als 24-Stunden-Mittelwert angegeben. Dadurch können die Werte auf der Karte deutlich von diesen 24-Stunden-Mittelwerten abweichen.
-		p Durch einen Klick auf das Plus vor der Sensor-ID können 2 Grafiken eingeblendet werden. Die Grafik '24 h floating' zeigt den gleitenden 24-Stunden-Mittelwert für die letzten 7 Tage an. Aus technischen Gründen ist am Anfang eine Lücke von einem Tag, die Darstellung zeigt also eigentlich 8 Tage, der erste ist aber leer. Die zweite Grafik 'Last 24 hours' zeigt den Tagesverlauf für die letzten 24 Stunden.
-	h3 #Sensors {{cell.length}}
+		p В настоящее время плитки окрашены в соответствии со средним значением PM10 всех датчиков в ячейке. См. шкалу в левом нижнем углу.
+		p Строка "среднее" содержит среднее значенее всех датчиков, содержащихся в ячейке. Числа в первом столбце после (+) соответствуют идентификаторам датчиков.
+		p Обратите внимание: мы показываем на карте значения последних 5 минут. Значения, опубликованные соответствующими государственными органами, даются как 24-часовое среднее значение. В результате значения на карте могут значительно отличаться от этих средних значений за 24 часа.
+		p Нажимая на плюс перед идентификатором датчика, можно отобразить 2 графика. График "24 h float" отображает 24-часовую скользящую среднюю за последние 7 дней. По техническим причинам в начале есть пробел в один день, поэтому на самом деле график показывает 8 дней, но первый пустой. Второй график "Last 24 hours" показывает данные за последние 24 часа.
+		p PM10 и PM2.5 количество мелкодисперсных частиц соответственно около 10 микрометров в диаметре и меньше и 2.5 микрометров и меньше.
+	h3 #Датчиков {{cell.length}}
 	
 	table
 		tr
-			th Sensor ID
-			th PM10 µg/m³
-			th PM2.5 µg/m³
+			th ID датчика
+			th PM10 мкг/м³
+			th PM2.5 мкг/м³
 		tr.mean
-			td mean
+			td среднее
 			td {{mean.P1.toFixed(0)}}
 			td {{mean.P2.toFixed(0)}}
 		template(v-for="sensor in cell")
